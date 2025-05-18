@@ -1,0 +1,55 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial;
+    margin: 0px;
+}
+
+main {
+    color: black;
+    font-family: Arial;
+    margin: 13px 26px 62.5px;
+    padding: 10px;
+    border-radius: 9px;
+    font-size: 14pt;
+}
+
+header {
+    background-color: dodgerblue;
+    color: white;
+    font-family: Arial;
+    font-size: 14pt;
+    padding: 13px;
+}
+
+footer {
+    background-color: dodgerblue;
+    color: white;
+    font-family: Arial;
+    font-size: 12pt;
+    padding: 13px;
+    font-style: italic;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+a {
+    color: royalblue;
+    text-decoration: none;
+    transition: 1s 2s;
+}
+
+a:hover {
+    color: dodgerblue;
+    text-decoration: underline;
+    box-shadow: 3px 3px 1px #0002;
+    transition: 0.3s;
+}
+
+a:active {
+    color: white;
+    opacity: 0.3;
+}
