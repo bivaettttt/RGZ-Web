@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Надршин Тимур Ринатович. РГЗ по WEB-программированию</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon-32x32.png">
+    <link rel="shortcut icon" href="favicon-16x16.png">
+    <style>
+        .b-menu {
+            color: blue;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .b-menu:hover {
+            background: dodgerblue;
+            color: white
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background-color: dodgerblue;
+            color: white;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .scroll-to-top {
+            cursor: pointer;
+            width: 30px;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20pt;
+            z-index: 999;
+            display: none;
+            transition: background-color 0.3s;
+        }
+        .text {
+            background: white;
+            box-shadow: 0 5px 5px -3px black;
+            z-index: 5px;
+            width: 70%;
+            margin-left: 225px;
+            padding: 20px;
+            border-top-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+        .news-container {
+            max-width:1200px;
+            margin:40px auto;
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px
+        }
+        .card {
+            background:#fff;
+            border-radius:8px;
+            box-shadow: 0px 2px 2px black;
+            padding:16px;
+            width:525px;
+            display:flex;
+            flex-direction:column
+        }
+        .date {
+            text-align: center;
+            border: 1px solid grey;
+            border-top-right-radius: 15px;
+            width: 160px;
+            padding: 10px;
+            background: white;
+            color: grey;
+            margin-bottom:4px
+        }
+        .title {
+            color: dodgerblue;
+            font-weight: bold;
+            font-size: 16pt;
+            margin:0 0 8px;
+        }
+        .excerpt {
+            margin-bottom:12px;
+            line-height:1.4
+        }
+        .full {
+            display:none;
+            margin-bottom:12px;
+            line-height:1.45;
+            white-space:pre-line
+        }
+        .btn {
+            border:none;
+            background:none;
+            color: blue;
+            cursor:pointer;
+            padding:0;
+            font-weight:600
+        }
+        .btn:hover {
+            text-decoration:underline
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';    
+            }   else {
+                menu.style.display = 'flex';
+            }
+        }
+        window.addEventListener('scroll', function() {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                scrollButton.style.display = 'block';
+            } else {
+                scrollButton.style.display = 'none';
+            }
+        });
+        document.querySelector('.scroll-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        function toggle(id, btn){
+            const block = document.getElementById(id);
+            const hidden = block.style.display === "" || block.style.display === "none";
+            block.style.display = hidden ? "block" : "none";
+            btn.textContent = hidden ? "Скрыть" : "Показать";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Расчетно-графическое задание
+        <hr>
+    </header>
+
+    <main>
+        <div class="b-menu" onclick="toggleMenu()">☰</div>
+
+        <div class="menu" id="menu">
+            <a href="company.html">О компании</a>
+            <a href="company.html">Новости</a>
+            <a href="company.html">Курс валют</a>
+            <a href="company.html">Контактные данные</a>
+            <a href="company.html">Видео</a>
+        </div>
+
+        <a href="#" class="scroll-to-top" title="К началу страницы">↑</a>
+
+        <h1 style="text-align: center; color: dodgerblue">Новости ГМК «Норильский никель»</h1>
+        <div class="text">
+
+            <div class="news-container">
+
+                <div class="card">
+                    <div class="date">22 мая 2025</div>
+                    <div class="title">Совет директоров рекомендовал не выплачивать дивиденды</div>
+                    <div class="excerpt">Наблюдательный совет обсудил финансовые показатели компании и предложил…</div>
+                    <div class="full" id="n1">Совет директоров рекомендовал годовому общему собранию акционеров 
+                        не выплачивать дивиденды по итогам 2024 года. Решение объясняется
+                        консервативной дивидендной политикой в период масштабной инвестиционной
+                        программы и высокой волатильностью рынков металлов.
+                    </div>
+                    <button class="btn" onclick="toggle('n1',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">22 мая 2025</div>
+                    <div class="title">На шахте «Глубокая» вскрыта первая залежь богатой руды</div>
+                    <div class="excerpt">Геолого-разведочные работы дошли до отметки −1650 м — это самые…</div>
+                    <div class="full" id="n2">Первые метры рудного тела вскрыты на глубине 1650 м, что делает
+                        «Глубокую» самой глубокой шахтой Евразии. С начала мая подъёмниками
+                        доставлено 2 300 т руды. В перспективе шахта выйдет на мощность 2,2 млн т/год
+                        и станет ключевым источником сырья для Быстринского ГОКа.
+                    </div>
+                    <button class="btn" onclick="toggle('n2',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">15 мая 2025</div>
+                    <div class="title">Запущен экспериментальный водородный локомотив</div>
+                    <div class="excerpt">На Октябрьской железной дороге прошли испытания первого…</div>
+                    <div class="full" id="n3">В сотрудничестве с «ТРАНСМАШХОЛДИНГОМ» компания разработала
+                        маневровый тепловоз на водородных топливных ячейках. Испытания показали
+                        снижение выбросов CO₂ на 90 % по сравнению с дизельным аналогом.
+                    </div>
+                    <button class="btn" onclick="toggle('n3',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">10 мая 2025</div>
+                    <div class="title">В Дудинке открыт новый центр детского творчества</div>
+                    <div class="excerpt">Социальный проект реализован «Норникелем» в рамках программы…</div>
+                    <div class="full" id="n4">Центр оснащён классами робототехники и VR-лабораторией. Ежегодно
+                        здесь смогут заниматься более 500 детей района. Инвестиции компании составили 320 млн рублей.
+                    </div>
+                    <button class="btn" onclick="toggle('n4',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">5 мая 2025</div>
+                    <div class="title">Обновлённый морской порт «Мурманск» принял первое судно</div>
+                    <div class="excerpt">Достроенная 3-я очередь терминала позволила увеличить…</div>
+                    <div class="full" id="n5">Первая руда объёмом 65 тыс. т была погружена на балкер «Arctic Star».
+                        Расширение терминала повысит экспортные мощности на 20 %.
+                    </div>
+                    <button class="btn" onclick="toggle('n5',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">29 апреля 2025</div>
+                    <div class="title">Экспорт никеля в Китай вырос на 12 %</div>
+                    <div class="excerpt">По итогам I квартала объём поставок составил…</div>
+                    <div class="full" id="n6">Драйвером роста стало восстановление китайского 
+                        рынка нержавеющей стали и выгодный курс юаня.
+                    </div>
+                    <button class="btn" onclick="toggle('n6',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">24 апреля 2025</div>
+                    <div class="title">Снижение выбросов SO₂ на 25 % за год</div>
+                    <div class="excerpt">Компания подвела промежуточные итоги программы «Чистый воздух»…</div>
+                    <div class="full" id="n7">На Надеждинском металлургическом заводе введены новые
+                        серокислотные установки. Общий объём инвестиций превысил 40 млрд рублей.
+                    </div>
+                    <button class="btn" onclick="toggle('n7',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">18 апреля 2025</div>
+                    <div class="title">ФНБ инвестирует в проект по добыче платина-медной руды</div>
+                    <div class="excerpt">Государственный фонд содействует строительству…</div>
+                    <div class="full" id="n8">Проект предполагает строительство подземного рудника мощностью
+                        5 млн т/год и обогатительной фабрики.
+                    </div>
+                    <button class="btn" onclick="toggle('n8',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">11 апреля 2025</div>
+                    <div class="title">Соглашение с МГУ по квантовым вычислениям</div>
+                    <div class="excerpt">Стороны создадут совместную лабораторию для моделирования…</div>
+                    <div class="full" id="n9">Лаборатория займётся расчётами кристаллических решёток
+                        платиноидов и оптимизацией производственных процессов.
+                    </div>
+                    <button class="btn" onclick="toggle('n9',this)">Показать</button>
+                </div>
+
+                <div class="card">
+                    <div class="date">4 апреля 2025</div>
+                    <div class="title">Размещён первый «зелёный» выпуск еврооблигаций</div>
+                    <div class="excerpt">Объём размещения составил 750 млн долларов США…</div>
+                    <div class="full" id="n10">Средства направят на модернизацию энергоснабжения и развитие
+                        возобновляемых источников.
+                    </div>
+                    <button class="btn" onclick="toggle('n10',this)">Показать</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Надршин Тимур Ринатович, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
