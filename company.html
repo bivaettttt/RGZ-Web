@@ -9,7 +9,11 @@
     <link rel="shortcut icon" href="favicon-32x32.png">
     <link rel="shortcut icon" href="favicon-16x16.png">
     <style>
+        html {
+            scroll-behavior:smooth; 
+        }
         .b-menu {
+            transition: 0.3s;
             color: blue;
             position: fixed;
             top: 20px;
@@ -40,10 +44,10 @@
             text-decoration: none;
             margin: 10px 0;
         }
-        .scroll-to-top {
+        .scroll-top {
             cursor: pointer;
             width: 30px;
-            padding: 10px;
+            padding: 5px;
             text-align: center;
             position: fixed;
             bottom: 80px;
@@ -54,7 +58,6 @@
             text-decoration: none;
             font-size: 20pt;
             z-index: 999;
-            display: none;
             transition: background-color 0.3s;
         }
         .img1 {
@@ -139,21 +142,6 @@
                 menu.style.display = 'flex';
             }
         }
-        window.addEventListener('scroll', function() {
-            const scrollButton = document.querySelector('.scroll-to-top');
-            if (window.scrollY > 300) {
-                scrollButton.style.display = 'block';
-            } else {
-                scrollButton.style.display = 'none';
-            }
-        });
-        document.querySelector('.scroll-to-top').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
         function showText(type, btn) {
             document.querySelectorAll ('.tabs button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -175,7 +163,7 @@
         }
     </script>
 </head>
-<body>
+<body id="top">
     <header>
         НГТУ, ФБ, Расчетно-графическое задание
         <hr>
@@ -187,12 +175,10 @@
         <div class="menu" id="menu">
             <a href="company.html">О компании</a>
             <a href="news.html">Новости</a>
-            <a href="company.html">Курс валют</a>
-            <a href="company.html">Контактные данные</a>
-            <a href="company.html">Видео</a>
+            <a href="curs.html">Калькулятор валюты</a>
+            <a href="contact.html">Контактные данные</a>
+            <a href="video.html">Видео</a>
         </div>
-
-        <a href="#" class="scroll-to-top" title="К началу страницы">↑</a>
 
         <h1 style="text-align: center; color: dodgerblue">ГМК «Норильский никель»</h1>
         
@@ -337,10 +323,10 @@
             </p>
         </div>
     </main>
-
     <footer>
         <hr>
         &copy; Надршин Тимур Ринатович, ФБИ-32, 2 курс, 2025
     </footer>
+    <a class="scroll-top" href="#top" title="Наверх">↑</a>
 </body>
 </html>

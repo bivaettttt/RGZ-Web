@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Надршин Тимур Ринатович. РГЗ по WEB-программированию</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon-32x32.png">
+    <link rel="shortcut icon" href="favicon-16x16.png">
+    <style>
+        html { 
+            scroll-behavior:smooth; 
+        }
+        .b-menu {
+            transition: 0.3s;
+            color: blue;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .b-menu:hover {
+            background: dodgerblue;
+            color: white
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background-color: dodgerblue;
+            color: white;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .scroll-top {
+            cursor: pointer;
+            width: 30px;
+            padding: 5px;
+            text-align: center;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20pt;
+            z-index: 999;
+            transition: background-color 0.3s;
+        }
+        .text {
+            background: white;
+            box-shadow: 0 5px 5px -3px black;
+            z-index: 5px;
+            width: 70%;
+            margin-left: 225px;
+            padding: 20px;
+            border-top-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';    
+            }   else {
+                menu.style.display = 'flex';
+            }
+        }
+        // Асинхронная функция для загрузки текущего курса и исторических данных, затем инициализации калькулятора и графика
+        async function loadRates() {
+            // 1. Получаем текущие курсы в формате JSON
+            const response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+            const data = await response.json();
+            // Извлекаем данные по гривне (UAH): номинал и стоимость
+            const uahData = data.Valute.UAH;
+            const nominal = uahData.Nominal;
+            const currentValue = uahData.Value;
+
+            const rateToday = (currentValue / nominal).toFixed(4); // 1 UAH в RUB
+            document.getElementById('todayRate').textContent = 
+                    `Курс на сегодня: 1 UAH = ${rateToday} RUB`;
+            // Рассчитываем функции конвертации на основе текущего курса
+            function rubToUah(rub) {
+                return rub * (nominal / currentValue);
+            }
+            function uahToRub(uah) {
+                return uah * (currentValue / nominal);
+            }
+            // Устанавливаем обработчики ввода для полей конвертера
+            const rubInput = document.getElementById('rubInput');
+            const uahInput = document.getElementById('uahInput');
+            rubInput.addEventListener('input', () => {
+                const rubAmount = parseFloat(rubInput.value) || 0;
+                uahInput.value = rubToUah(rubAmount).toFixed(2);
+            });
+            uahInput.addEventListener('input', () => {
+                const uahAmount = parseFloat(uahInput.value) || 0;
+                rubInput.value = uahToRub(uahAmount).toFixed(2);
+            });
+
+            // 2. Получаем исторические курсы за 30 дней (включая текущий)
+            let rates = [];
+            let rateData = data;
+            for (let i = 0; i < 30; i++) {
+                // Берём дату и курс UAH из текущего объекта данных
+                const dateStr = rateData.Date;  // например, "2025-05-24T11:30:00+03:00"
+                const dateObj = new Date(dateStr);
+                // Добавляем в массив: дата (в формате ДД.ММ.ГГГГ) и курс (руб. за 1 UAH)
+                rates.push({
+                    date: dateObj.toLocaleDateString('ru-RU'),
+                    rate: rateData.Valute.UAH.Value / rateData.Valute.UAH.Nominal
+                });
+                // Переходим к предыдущему дню, если ссылка доступна
+                if (!rateData.PreviousURL) break;
+                let prevUrl = rateData.PreviousURL;
+                if (prevUrl.startsWith('//')) {
+                    prevUrl = 'https:' + prevUrl;
+                }
+                const prevResponse = await fetch(prevUrl);
+                if (!prevResponse.ok) break;
+                rateData = await prevResponse.json();
+            }
+            // Переворачиваем массив, чтобы даты шли в хронологическом порядке (от самой старой к новой)
+            rates.reverse();
+
+            // 3. Строим график с помощью Chart.js
+            const labels = rates.map(item => item.date);
+            const values = rates.map(item => parseFloat(item.rate.toFixed(4)));  // округляем до 4 знаков для чистоты
+            const ctx = document.getElementById('rateChart').getContext('2d');
+            let selectedIndex = null;  // индекс выбранного столбца графика (для подсветки)
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'UAH в RUB (рублей за 1 гривну)',
+                        data: values,
+                        backgroundColor: 'dodgerblue',  // исходный цвет столбцов 
+                        borderColor: 'dodgerblue',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: false }  // начало оси Y не с нуля, чтобы нагляднее показать динамику
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            // Обновляем цвета столбцов: выделяем выбранный столбец другим цветом
+                            chart.data.datasets[0].backgroundColor = chart.data.labels.map((_, i) =>
+                                i === index ? 'darkblue'   // выделенный столбец 
+                                        : 'dodgerblue'   // остальные столбцы (исходный цвет)
+                            );
+                            chart.update();
+                            // Отображаем информацию о выбранной точке (дата и курс)
+                            const sel = rates[index];
+                            document.getElementById('info').textContent =
+                                'Дата: ' + sel.date + ', курс: ' + sel.rate.toFixed(4) + ' руб. за 1 UAH';
+                        }
+                    }
+                }
+            });
+        }
+
+        // Запускаем загрузку данных и инициализацию при открытии страницы
+        loadRates();
+    </script>
+</head>
+<body id="top">
+    <header>
+        НГТУ, ФБ, Расчетно-графическое задание
+        <hr>
+    </header>
+
+    <main>
+        <div class="b-menu" onclick="toggleMenu()">☰</div>
+
+        <div class="menu" id="menu">
+            <a href="company.html">О компании</a>
+            <a href="news.html">Новости</a>
+            <a href="curs.html">Калькулятор валюты</a>
+            <a href="contact.html">Контактные данные</a>
+            <a href="video.html">Видео</a>
+        </div>
+
+        <h1 style="text-align: center; color: dodgerblue">Калькулятор валюты</h1>
+        <div class="text">
+            <h2>Конвертер RUB ↔ UAH</h2>
+            <p id="todayRate" style="font-weight: bold; color: dodgerblue"></p>
+            <p>
+                <label>RUB: <input type="number" id="rubInput" placeholder="Сумма в рублях"></label>
+                <label>UAH: <input type="number" id="uahInput" placeholder="Сумма в гривнах"></label>
+            </p>
+
+            <h3>Курс гривны (UAH) к рублю за последний месяц</h3>
+            <canvas id="rateChart" width="800" height="400"></canvas>
+            <p id="info"></p>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Надршин Тимур Ринатович, ФБИ-32, 2 курс, 2025
+    </footer>
+    <a class="scroll-top" href="#top" title="Наверх">↑</a>
+</body>
+</html>
