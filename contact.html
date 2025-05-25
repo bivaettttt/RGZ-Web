@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Надршин Тимур Ринатович. РГЗ по WEB-программированию</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon-32x32.png">
+    <link rel="shortcut icon" href="favicon-16x16.png">
+    <style>
+        html { 
+            scroll-behavior:smooth; 
+        }
+        .b-menu {
+            transition: 0.3s;
+            color: blue;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .b-menu:hover {
+            background: dodgerblue;
+            color: white
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background-color: dodgerblue;
+            color: white;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .scroll-top {
+            cursor: pointer;
+            width: 30px;
+            padding: 5px;
+            text-align: center;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20pt;
+            z-index: 999;
+            transition: background-color 0.3s;
+        }
+        .text {
+            background: white;
+            box-shadow: 0 5px 5px -3px black;
+            z-index: 5px;
+            width: 70%;
+            margin-left: 225px;
+            padding: 20px;
+            border-top-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';    
+            }   else {
+                menu.style.display = 'flex';
+            }
+        }
+    </script>
+</head>
+<body id="top">
+    <header>
+        НГТУ, ФБ, Расчетно-графическое задание
+        <hr>
+    </header>
+
+    <main>
+        <div class="b-menu" onclick="toggleMenu()">☰</div>
+
+        <div class="menu" id="menu">
+            <a href="company.html">О компании</a>
+            <a href="news.html">Новости</a>
+            <a href="curs.html">Калькулятор валюты</a>
+            <a href="contact.html">Контактные данные</a>
+            <a href="video.html">Видео</a>
+        </div>
+
+        <h1 style="text-align: center; color: dodgerblue">Контактные данные ГМК «Норильский никель»</h1>
+        <div class="text">
+            <div class="contact">
+                <h2>ПАО ГМК «Норильский никель»</h2>
+                <p>Адрес: Российская Федерация, 123112, г. Москва, 1-й Красногвардейский проезд., д. 15</p>
+                <p>Телефон: <a href="tel:+74957877667">+7 (495) 787-76-67</a></p>
+                <p>E-mail: <a href="mailto:gmk@nornik.ru">gmk@nornik.ru</a></p>
+            </div>
+
+            <div class="map">
+                <h2>ПАО ГМК «Норильский никель» на карте</h2>
+                <iframe 
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A0bd89977728ccefdfca4067cb06c3a0b5a0d3361d5d5ff727ee1b158b0e082fe&amp;source=constructor"
+                    width="100%" height="420" frameborder="0" allowfullscreen
+                    style="border: 1px solid grey; border-radius: 5px"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Надршин Тимур Ринатович, ФБИ-32, 2 курс, 2025
+    </footer>
+    <a class="scroll-top" href="#top" title="Наверх">↑</a>
+</body>
+</html>
