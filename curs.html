@@ -14,7 +14,12 @@
         }
         .b-menu {
             transition: 0.3s;
-            color: blue;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            text-align: center;
+            width: 35px;
+            background: #003c7e;
             position: fixed;
             top: 20px;
             right: 20px;
@@ -30,9 +35,9 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 200px;
+            width: 250px;
             height: 100%;
-            background-color: dodgerblue;
+            background-color: #003c7e;
             color: white;
             padding: 20px;
             display: none;
@@ -52,7 +57,7 @@
             position: fixed;
             bottom: 80px;
             right: 20px;
-            background-color: dodgerblue;
+            background-color: #003c7e;
             color: white;
             border-radius: 50%;
             text-decoration: none;
@@ -69,6 +74,77 @@
             padding: 20px;
             border-top-right-radius: 25px;
             border-bottom-left-radius: 25px;
+        }
+        #todayRate {
+            display: inline-block;
+            margin: 12px auto 20px;
+            font-size: 18pt;
+            width: 450px;
+            font-weight: bold; 
+            color: white; 
+            border: 1px solid dodgerblue; 
+            border-radius:5px; 
+            padding: 8px 16px; 
+            background:dodgerblue;
+        }
+        #rubInput {
+            border: 1px solid #003c7e;
+            padding: 5px;
+            border-radius: 5px;
+            color: #003c7e;
+            font-size: 14pt;
+            text-align: center;
+        }
+        #uahInput {
+            border: 1px solid #003c7e;
+            padding: 5px;
+            border-radius: 5px;
+            color: #003c7e;
+            font-size: 14pt;
+            text-align: center;
+        }
+        .converter-card {
+            max-width: 520px;
+            margin: 24px auto;
+            background: #f5faff;
+            border: 1px solid #d0e4ff;
+            border-radius: 12px;
+            padding: 26px 32px;
+            box-shadow: 0 6px 6px black;
+            text-align: center;
+        }
+        .converter-card h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .input-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .inpur-row label {
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+        }
+        .converter-card input {
+            padding: 8px 10px;
+            border: 1px solid #b9d6ff;
+            border-radius: 6px;
+            font-size: 12pt;
+            width: 180px;
+        }
+        #info {
+            margin: 14px auto 0;
+            max-width: 540px;
+            background: #eaf4ff;
+            border-left: 5px solid dodgerblue;
+            padding: 10px 14px;
+            font-weight: bold;
+            color: #003c7e;
+            border-radius: 6px;
+            transition: background-color .2s;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -164,7 +240,7 @@
                             const index = elements[0].index;
                             // Обновляем цвета столбцов: выделяем выбранный столбец другим цветом
                             chart.data.datasets[0].backgroundColor = chart.data.labels.map((_, i) =>
-                                i === index ? 'darkblue'   // выделенный столбец 
+                                i === index ? '#003c7e'   // выделенный столбец 
                                         : 'dodgerblue'   // остальные столбцы (исходный цвет)
                             );
                             chart.update();
@@ -196,19 +272,23 @@
             <a href="news.html">Новости</a>
             <a href="curs.html">Калькулятор валюты</a>
             <a href="contact.html">Контактные данные</a>
-            <a href="video.html">Видео</a>
+            <a href="video.html">Библиотека материаллов</a>
         </div>
 
-        <h1 style="text-align: center; color: dodgerblue">Калькулятор валюты</h1>
+        <h1 style="text-align: center;">Калькулятор валюты</h1>
         <div class="text">
-            <h2>Конвертер RUB ↔ UAH</h2>
-            <p id="todayRate" style="font-weight: bold; color: dodgerblue"></p>
-            <p>
-                <label>RUB: <input type="number" id="rubInput" placeholder="Сумма в рублях"></label>
-                <label>UAH: <input type="number" id="uahInput" placeholder="Сумма в гривнах"></label>
-            </p>
+            <div class="converter-card">
+                <h3>Конвертер Российский рубль (RUB) ↔ Украинаская гривна (UAH)</h3>
 
-            <h3>Курс гривны (UAH) к рублю за последний месяц</h3>
+                <p id="todayRate"></p>
+
+                <div class="input-row">
+                        <label>RUB: <input type="number" id="rubInput" placeholder="Сумма в рублях"></label>
+                        <label>UAH: <input type="number" id="uahInput" placeholder="Сумма в гривнах"></label>
+                </div>
+
+            </div>
+            <h3 style="text-align:center; margin-top: 55px">Курс Украинской гривны (UAH) к Российскому рублю (RUB) за последний месяц</h3>
             <canvas id="rateChart" width="800" height="400"></canvas>
             <p id="info"></p>
         </div>

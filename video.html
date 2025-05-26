@@ -14,7 +14,12 @@
         }
         .b-menu {
             transition: 0.3s;
-            color: blue;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            text-align: center;
+            width: 35px;
+            background: #003c7e;
             position: fixed;
             top: 20px;
             right: 20px;
@@ -30,9 +35,9 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 200px;
+            width: 250px;
             height: 100%;
-            background-color: dodgerblue;
+            background-color: #003c7e;
             color: white;
             padding: 20px;
             display: none;
@@ -52,7 +57,7 @@
             position: fixed;
             bottom: 80px;
             right: 20px;
-            background-color: dodgerblue;
+            background-color: #003c7e;
             color: white;
             border-radius: 50%;
             text-decoration: none;
@@ -69,6 +74,29 @@
             padding: 20px;
             border-top-right-radius: 25px;
             border-bottom-left-radius: 25px;
+        }
+        .wrapper {
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+        .video-card {
+            background: #fff;
+            border: 1px solid #d6e4ff;
+            border-radius: 12px;
+            box-shadow: 0 2px 2px #002;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .video-card h2 {
+            margin: 0;
+            text-align: center;
+            color: #003c7e;
+        }
+        .video-card iframe {
+            border: 1px solid #bccdf8;
+            border-radius: 8px;
         }
     </style>
     <script>
@@ -96,24 +124,26 @@
             <a href="news.html">Новости</a>
             <a href="curs.html">Калькулятор валюты</a>
             <a href="contact.html">Контактные данные</a>
-            <a href="video.html">Видео</a>
+            <a href="video.html">Библиотека материаллов</a>
         </div>
+        <div class="wrapper">
+            <h1 style="text-align: center; margin-top: 0">Библиотека материаллов ГМК «Норильский никель»</h1>
+            <div class="text">
+                <article class="video-card">
 
-        <h1 style="text-align: center; color: dodgerblue">Библиотека материаллов ГМК «Норильский никель»</h1>
-        <div class="text">
-            <div class="contact">
+                    <h2>Интервью Владимира Потанина - Президента ГМК «Норильский никель»</h2>
 
-            <div class="map">
-                <h2>Интервью Владимира Потанина - Президента ГМК «Норильский никель»</h2>
+                    <iframe width="100%" height="550"
+                        src="https://rutube.ru/play/embed/01ba0a0df0aaa8aaf59e1147b37302ba/" 
+                        frameBorder="0" allow="clipboard-write; autoplay" 
+                        webkitAllowFullScreen mozallowfullscreen allowFullScreen
+                        style="border: 1px solid grey; border-radius: 5px">
+                    </iframe>
 
-                <iframe width="100%" height="600"
-                    src="https://rutube.ru/play/embed/01ba0a0df0aaa8aaf59e1147b37302ba/" 
-                    frameBorder="0" allow="clipboard-write; autoplay" 
-                    webkitAllowFullScreen mozallowfullscreen allowFullScreen
-                    style="border: 1px solid grey; border-radius: 5px">
-                </iframe>
-
-                <h3>Владимир Потанин: стратегия и дивиденды Норникеля, перегрев экономики России, ставка ЦБ, курс рубля</h3>
+                    <p style="margin: 0; text-align: center; font-weight: bold">
+                        Владимир Потанин: стратегия и дивиденды Норникеля, перегрев экономики России, ставка ЦБ, курс рубля
+                    </p>
+                </article>
             </div>
         </div>
     </main>

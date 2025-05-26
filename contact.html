@@ -14,7 +14,12 @@
         }
         .b-menu {
             transition: 0.3s;
-            color: blue;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            text-align: center;
+            width: 35px;
+            background: #003c7e;
             position: fixed;
             top: 20px;
             right: 20px;
@@ -30,9 +35,9 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 200px;
+            width: 250px;
             height: 100%;
-            background-color: dodgerblue;
+            background-color: #003c7e;
             color: white;
             padding: 20px;
             display: none;
@@ -52,7 +57,7 @@
             position: fixed;
             bottom: 80px;
             right: 20px;
-            background-color: dodgerblue;
+            background-color: #003c7e;
             color: white;
             border-radius: 50%;
             text-decoration: none;
@@ -69,6 +74,54 @@
             padding: 20px;
             border-top-right-radius: 25px;
             border-bottom-left-radius: 25px;
+        }
+        .container {
+            margin:0 auto; 
+            padding:24px 18px;
+            font-family:Arial,Helvetica,sans-serif; 
+            line-height:1.45;
+        }
+
+        .contact-grid{
+            display:flex; 
+            gap:32px; 
+            flex-wrap:wrap; 
+            align-items:flex-start;
+        }
+
+        .contact-card{
+            flex:1 1 320px;
+            background:#f6faff;
+            border:1px solid #cfdfff;
+            border-radius:10px; 
+            padding:20px 26px;
+            box-shadow:0 2px 2px #002;
+        }
+
+        .contact-card h2 {
+            margin-top:0;
+            color: #003c7e
+        }
+        .contact-card a {
+            color:dodgerblue;
+            text-decoration:none
+        }
+        .contact-card a:hover {
+            text-decoration:underline
+        }
+        .map-box{
+            flex:2 1 480px;
+            padding: 20px 26px;
+            background:#f6faff;
+            border:1px solid #cfdfff;
+            border-radius:10px;
+            box-shadow:0 2px 2px #002;
+        }
+        .map-box iframe{
+            width:100%; 
+            height:420px; 
+            border:1px solid #cfdfff; 
+            border-radius:10px;
         }
     </style>
     <script>
@@ -96,24 +149,45 @@
             <a href="news.html">Новости</a>
             <a href="curs.html">Калькулятор валюты</a>
             <a href="contact.html">Контактные данные</a>
-            <a href="video.html">Видео</a>
+            <a href="video.html">Библиотека материаллов</a>
         </div>
+        <div class="container">
 
-        <h1 style="text-align: center; color: dodgerblue">Контактные данные ГМК «Норильский никель»</h1>
-        <div class="text">
-            <div class="contact">
-                <h2>ПАО ГМК «Норильский никель»</h2>
-                <p>Адрес: Российская Федерация, 123112, г. Москва, 1-й Красногвардейский проезд., д. 15</p>
-                <p>Телефон: <a href="tel:+74957877667">+7 (495) 787-76-67</a></p>
-                <p>E-mail: <a href="mailto:gmk@nornik.ru">gmk@nornik.ru</a></p>
-            </div>
+            <h1 style="text-align: center;">Контактные данные ГМК «Норильский никель»</h1>
 
-            <div class="map">
-                <h2>ПАО ГМК «Норильский никель» на карте</h2>
-                <iframe 
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A0bd89977728ccefdfca4067cb06c3a0b5a0d3361d5d5ff727ee1b158b0e082fe&amp;source=constructor"
-                    width="100%" height="420" frameborder="0" allowfullscreen
-                    style="border: 1px solid grey; border-radius: 5px"></iframe>
+            <div class="text">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h2>ПАО ГМК «Норильский никель»</h2>
+                        <p>
+                            <strong>Адрес:&nbsp;</strong>
+                            Российская Федерация, 123112, г.&nbsp;Москва,<br>
+                            1-й&nbsp;Красногвардейский&nbsp;проезд., д.&nbsp;15
+                        </p>
+                        <p>
+                            <strong>Телефон:&nbsp;</strong>
+                            <a href="tel:+74957877667">+7&nbsp;(495)&nbsp;787-76-67</a>
+                        </p>
+                        <p>
+                            <strong>E-mail:&nbsp;</strong>
+                            <a href="mailto:gmk@nornik.ru">gmk@nornik.ru</a>
+                        </p>
+                        <hr style="border: none; border-top: 1px dashed #b6c9ff; margin: 16px 0">
+                        <p>
+                            <strong>Служба корпоративного доверия:</strong><br>
+                            <a href="tel:+78007001941">+7&nbsp;800&nbsp;700-19-41</a><br>
+                            <a href="mailto:skd@nornik.ru">skd@nornik.ru</a>
+                        </p>
+                    </div>
+
+                    <div class="map-box">
+                        <h2 style="margin: 0 0 8px; color: #003c7e">ПАО ГМК «Норильский никель» на карте</h2>
+                        <iframe 
+                            src="https://yandex.ru/map-widget/v1/?um=constructor%3A0bd89977728ccefdfca4067cb06c3a0b5a0d3361d5d5ff727ee1b158b0e082fe&amp;source=constructor"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

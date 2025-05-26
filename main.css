@@ -15,7 +15,7 @@ main {
 }
 
 header {
-    background-color: dodgerblue;
+    background-color: #003c7e;
     color: white;
     font-family: Arial;
     font-size: 14pt;
@@ -23,7 +23,7 @@ header {
 }
 
 footer {
-    background-color: dodgerblue;
+    background-color: #003c7e;
     color: white;
     font-family: Arial;
     font-size: 12pt;
@@ -37,19 +37,14 @@ footer {
 }
 
 a {
-    color: royalblue;
+    color: #003c7e;
     text-decoration: none;
-    transition: 1s 2s;
-}
-
-a:hover {
-    color: dodgerblue;
-    text-decoration: underline;
-    box-shadow: 3px 3px 1px #0002;
     transition: 0.3s;
 }
 
-a:active {
-    color: white;
-    opacity: 0.3;
+a:hover {
+    color: #003c7e;
+    text-decoration: underline;
+    box-shadow: 3px 3px 1px #0002;
+    transition: 0.3s;
 }
